@@ -6,7 +6,7 @@
 ## Технологии
 - React + Ts (Vite)
 - ReactRouterDOM (переключение между страницами)
-- ...
+- ReactBootstrap, SASS (Стили)
 
 ## Использование
 $ npm i 
