@@ -1,20 +1,4 @@
-@media (orientation: portrait) and (min-width: 100px) {
-    .layout {
-        grid-template-columns: 1fr 4fr ;
-    }
-}
 
-@media (orientation: portrait) and (min-width: 300px) {
-    .layout {
-        grid-template-rows: max-content max-content ;
-    }
-}
-
-@media (orientation: landscape) {
-    .layout {
-        grid-template-columns: max-content max-content ;
-    }
-}
 .layout {
     background-color: rgb(154, 187, 236);
     min-height: 100%;
@@ -24,9 +8,22 @@
     display: grid;
     gap: 30px;
     grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr;
 @media screen and (orientation: landscape) {
     max-width: 1280px;
     height: 100%;
     grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr;
     }
+}
+
+.outlet {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: aliceblue;
+    display: grid;
+    gap: 20px;
+    align-content: space-between;
+    padding: 10px;
 }

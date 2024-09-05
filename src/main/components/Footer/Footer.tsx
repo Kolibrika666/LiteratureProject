@@ -2,8 +2,8 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div>
-      <data>2023</data>
+    <div className="footer">
+      <data>2024 г.</data>
     </div>
   );
 };

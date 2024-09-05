@@ -9,7 +9,7 @@ export const Layout = () => {
           <section>
           <Nav />
           </section>
-          <section>
+          <section className={s.outlet}>
           <Header />
           <Outlet />
           <Footer />
