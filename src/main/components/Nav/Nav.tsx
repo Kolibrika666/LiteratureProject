@@ -1,21 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { categories } from "../../models";
+import { Button, NavLink } from "react-bootstrap";
 
 export const Nav = () => {
   return (
     <>
-      <button>Категории</button>
+      <h3>Категории</h3>
       <div>
-        <button>Интернет-источник</button>
-        <button> Журнальная статья</button>
-        <button>Монография</button>
-        <button>Монография</button>
-        <button>Учебник</button>
-        <button>Учебное пособие</button>
-        <button>Диссертация</button>
-        <button>Обзор</button>
-        <button>Патент</button>
-        <button>Материал конференции</button>
-        <button>Словарь</button>
+        {
+          categories.map((e)=> 
+          <Link key={e.id} to={e.title}><Button>{e.title}</Button></Link>
+          )
+        }
+      
       </div>
     </>
   );
