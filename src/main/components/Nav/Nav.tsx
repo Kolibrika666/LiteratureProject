@@ -7,14 +7,14 @@ export const Nav = () => {
   return (
     <>
       <h3>Категории</h3>
-      <div>
+      <>
         {
           categories.map((e)=> 
-          <Link key={e.id} to={e.title}><Button>{e.title}</Button></Link>
+          <Link key={e.id} to={e.title}><Button >{e.title}</Button></Link>
           )
         }
       
-      </div>
+      </>
     </>
   );
 };

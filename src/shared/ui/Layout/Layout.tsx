@@ -6,7 +6,7 @@ import s from './Layout.module.scss'
 export const Layout = () => {
   return (
     <div className={s.layout} >
-          <section>
+          <section className={s.nav}>
           <Nav />
           </section>
           <section className={s.outlet}>
