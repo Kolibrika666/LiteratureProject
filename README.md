@@ -7,6 +7,7 @@
 - React + Ts (Vite)
 - ReactRouterDOM (переключение между страницами)
 - ReactBootstrap, SASS (Стили)
+- react-hook-form
 
 ## Использование
 $ npm i 
@@ -15,5 +16,6 @@ $ npm i
 - [x] Создать шаблон vite
 - [x] Шаблон стилей 
 - [x] Lazy-outlet
-- [x] 
-- [] Стили меню
+- [x] Адаптивная вёрстка
+- [х] Стили меню
+- [ ] Шаблон формы

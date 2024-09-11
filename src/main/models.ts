@@ -46,3 +46,4 @@ export const categories: category[] = [
         title: 'Материал конференции',
     },
 ]
+
