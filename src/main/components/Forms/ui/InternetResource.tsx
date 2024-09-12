@@ -2,14 +2,16 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { InternetType } from "../modal";
+import { getInternetResourse } from "../hooks/hooks";
 
 const InternetResource = () => {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors, isValid },
   } = useForm<InternetType>();
-  const onSubmit: SubmitHandler<InternetType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<InternetType> = (data) => console.log(getInternetResourse(data));
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -21,14 +23,14 @@ const InternetResource = () => {
           placeholder=""
           {...register("site", {
             required: "Поле обязательно к заполнению",
-            pattern: /^[A-ZА-ЯЁ]{1}/,
+            pattern: {
+              value: /^[A-ZА-ЯЁ]{1}/,
+              message: "Введите название с большой буквы",
+            },
+            onChange: () => trigger("site"),
           })}
         />
-        {errors.site && (
-          <Form.Text>
-            {errors.site.message || "Введите название с большой буквы"}
-          </Form.Text>
-        )}
+        {errors?.site && <Form.Text>{errors?.site?.message}</Form.Text>}
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Название статьи</Form.Label>
@@ -36,15 +38,14 @@ const InternetResource = () => {
           type="text"
           placeholder=""
           {...register("title", {
-            required: "Поле обязательно к заполнению",
-            pattern: /^[A-ZА-ЯЁ]{1}/,
+            pattern: {
+              value: /^[A-ZА-ЯЁ]{1}/,
+              message: "Введите название с большой буквы",
+            },
+            onChange: () => trigger("title"),
           })}
         />
-        {errors?.title && (
-          <Form.Text>
-            {errors?.title?.message || "Введите название с большой буквы"}
-          </Form.Text>
-        )}
+        {errors?.title && <Form.Text>{errors?.title?.message}</Form.Text>}
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Фамилия автора</Form.Label>
@@ -52,13 +53,15 @@ const InternetResource = () => {
           type="text"
           placeholder=""
           {...register("lastName", {
-            pattern: /^[А-ЯЁ]{1}/,
+            pattern: {
+              value: /^[А-ЯЁ]{1}/,
+              message: "C большой буквы, на русском языке",
+            },
+            onChange: () => trigger("lastName"),
           })}
         />
         {errors?.lastName && (
-          <Form.Text>
-            {errors?.lastName?.message || "C большой буквы, на русском языке"}
-          </Form.Text>
+          <Form.Text> {errors?.lastName?.message}</Form.Text>
         )}
       </Form.Group>
       <Form.Group className="mb-3">
@@ -72,6 +75,7 @@ const InternetResource = () => {
               value: 1,
               message: "Максимум 1 символ",
             },
+            onChange: () => trigger("firstLetter"),
           })}
         />
         {errors?.firstLetter && (
@@ -87,18 +91,19 @@ const InternetResource = () => {
           type="letter"
           placeholder=""
           {...register("lastLetter", {
-            pattern: /[А-ЯЁ]/,
+            pattern: {
+              value: /[А-ЯЁ]/,
+              message: "Введите одну заглавную русскую букву",
+            },
             maxLength: {
               value: 1,
               message: "Максимум 1 символ",
             },
+            onChange: () => trigger("lastLetter"),
           })}
         />
         {errors?.lastLetter && (
-          <Form.Text>
-            {errors?.lastLetter?.message ||
-              "Введите одну заглавную русскую букву"}
-          </Form.Text>
+          <Form.Text>{errors?.lastLetter?.message}</Form.Text>
         )}
       </Form.Group>
       <Form.Group className="mb-3">
@@ -107,17 +112,19 @@ const InternetResource = () => {
           placeholder="https://example.com"
           {...register("url", {
             required: "Поле обязательно к заполнению",
-            pattern:
-              /^(https?|ftp):\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i,
+            pattern: {
+              value:
+                /^(https?|ftp):\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i,
+              message: "Правильно скопируйте ссылку на сайт",
+            },
+            onChange: () => trigger("url"),
           })}
         />
-        {errors?.url && (
-          <Form.Text>
-            {errors?.url?.message || "Правильно скопируйте ссылку на сайт"}
-          </Form.Text>
-        )}
+        {errors?.url && <Form.Text>{errors?.url?.message}</Form.Text>}
       </Form.Group>
-        <Button variant={!isValid ? "secondary" :  "primary"  } type="submit">Генерировать</Button>
+      <Button variant={!isValid ? "secondary" : "primary"} type="submit">
+        Генерировать
+      </Button>
     </Form>
   );
 };

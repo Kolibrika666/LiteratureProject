@@ -6,7 +6,7 @@ export type InternetType = {
     firstLetter?: string;
     lastLetter?: string;
     url: string;
-    date: Date;
+    date?: Date;
 }
 
 export type MonographType = {
