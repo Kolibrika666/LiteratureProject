@@ -1,17 +1,27 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { InternetType } from "../modal";
+import { InternetType } from "../models";
 import { getInternetResourse } from "../hooks/hooks";
+import { formActions} from "../slice/formSlice";
+import { useAppDispatch} from "../../../../store";
 
 const InternetResource = () => {
+  const addList = formActions.addLiterList;
+  const setIsNull = formActions.setListIsNan;
+  const dispatch = useAppDispatch()
+
   const {
     register,
     handleSubmit,
     trigger,
     formState: { errors, isValid },
   } = useForm<InternetType>();
-  const onSubmit: SubmitHandler<InternetType> = (data) => console.log(getInternetResourse(data));
+
+  const onSubmit: SubmitHandler<InternetType> = (data) => {
+    dispatch(addList(getInternetResourse(data)))
+    dispatch(setIsNull(false));
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

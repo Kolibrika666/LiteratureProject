@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { InternetType } from "../modal";
+import { InternetType, LiterType } from "../models";
+import { formActions } from "../slice/formSlice";
 
 export function getDate() {
   const date = new Date();
@@ -7,16 +8,17 @@ export function getDate() {
   return formatter.format(date);
 }
 
-export function getInternetResourse(data: InternetType) {
-  const description = useMemo(() => {
+let id = 1;
+
+export function getInternetResourse(data: InternetType):LiterType[] {
     const date = getDate();
+    let str = "";
     if (data.title && data.lastName) {
-      return `${data.title} / ${data.lastName} ${data.firstLetter}.${data.lastLetter}. [Электронный ресурс]. - URL: ${data.url} (${date})`;
+      str =  `${data.title} / ${data.lastName} ${data.firstLetter}.${data.lastLetter}. [Электронный ресурс]. - URL: ${data.url} (${date})`
     } else if (data.site && !data.title) {
-      return `${data.site}. - Режим доступа: ${data.url}, ${date}`;
+      str = `${data.site}. - Режим доступа: ${data.url}, ${date}`
     } else {
-      return `${data.title} [Электронный ресурс]. - URL: ${data.url} (${date})`;
+      str = `${data.title} [Электронный ресурс]. - URL: ${data.url} (${date})`
     }
-  }, []);
-  return description;
+    return [{id: ++id, str: str}]
 }

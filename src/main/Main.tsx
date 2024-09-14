@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense} from "react";
 import { StartPage } from "./components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "../shared";

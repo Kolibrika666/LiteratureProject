@@ -1,4 +1,7 @@
-
+export type LiterType = {
+    id: number;
+    str: string;
+}
 export type InternetType = {
     site: string;
     title: string;

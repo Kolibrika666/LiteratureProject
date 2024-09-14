@@ -1,23 +1,34 @@
 import { createSlice , PayloadAction } from "@reduxjs/toolkit";
-import { formSlice } from "..";
+import { LiterType } from "../models";
 
 type InitialStateType = {
-    like: string | undefined,
+    literList: LiterType[];
+    listIsNull: boolean;
 }
 
 const initialState: InitialStateType = {
-    like: '0',
+    literList: [{ id: 0, str: 'Пока ничего нет...',}],
+    listIsNull: true,
 }
    
 const formSlice = createSlice({
     name: 'form',
     initialState,
     reducers: {
-        setLike(state, action : PayloadAction<string>) {
-        
+        setListIsNan(state, action: PayloadAction<boolean>) {
+            state.listIsNull = action.payload
         },
+        addLiterList(state, action : PayloadAction<LiterType[]>) {
+            state.literList.push(...action.payload)
+        }
     }
+    ,
+    selectors: {
+        literList: state => state.literList,
+        listisNull: state => state.listIsNull,
+    },
 })
 
-export const {setLike} = formSlice.actions;
-export default formSlice.reducer;
+export const formReducer = formSlice.reducer;
+export const formActions = formSlice.actions;
+export const formSelectors = formSlice.selectors;
