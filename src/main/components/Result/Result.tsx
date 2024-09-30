@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Button, CloseButton } from "react-bootstrap";
 import { useAppSelector } from "../../../store";
-import { formActions, formSelectors } from "../Forms/slice/formSlice";
-import { LiterType } from "../Forms/models";
+import { formSelectors } from "../Forms/slice/formSlice";
+import { ResultItem } from "./ResultItem";
+import s from "./Result.module.scss"
 
 export const Result = () => {
 
@@ -11,10 +12,13 @@ export const Result = () => {
 
 
   return (
+    <div className={s.result}>
     <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="0">
         <Accordion.Header>
           Ваш список литературы
+          <button className={s.removeButton}></button>
+          <button className={s.copyButton}></button>
           </Accordion.Header>
         <Accordion.Body>
           {
@@ -23,11 +27,12 @@ export const Result = () => {
           <p key={e.id}>{e.str}</p>
           ) :
           literList.slice(1).map((e)=>
-          <p key={e.id}>{e.str}</p>
+          <ResultItem id={e.id} str={e.str}/>
           )
         }
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
+    </div>
   );
 };
